@@ -1,31 +1,159 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    
+
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Chat Loud</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Chat Loud", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="livesearchli">
+                        <input type="text" class="searchtext" id="searchtext" placeholder="Search Friends..." />
+                        <ul id="livesearchul"></ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <div class="jumbotron">
+            <h1>ASP.NET</h1>
+            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Getting started</h2>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="messages"></div>
+                        <textarea class="form-control"></textarea>
+
+                        <a id="sendMsg" class="btn btn-default">Send</a>
+                    </div>
+                </div>
+            </div>
+            <div class="chat @User.Identity.Name">
+                <ul></ul>
+            </div> 
+            
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery.signalR-2.2.3.min.js"></script>
+    <script src="/signalr/hubs"></script>
+      
+    <script>
+        $(document).ready(function () {
+            console.log("hello");
+            $("input#searchtext").keyup(function () {
+                var url = "/Profile/LiveSearch"
+                var searchVal = $("input#searchtext").val();
+
+                console.log(url);
+
+                $("ul#livesearchul").empty();
+
+                if (searchVal == "" || searchVal.trim() == "") return false;
+
+                $.post(url, { searchVal: searchVal }, function (data) {
+                    if (data.length > 0) {
+                        $("ul#livesearchul").append("<li id=close class=close><a>x</a></li>");
+                    }
+                    for (var i = 0; i < data.length; i++) {
+                        var obj = data[i];
+                        $("ul#livesearchul").append("<li class=livesearchli><a href='/Profile/Index/"+obj.Id+"'>" + obj.UserName + "</a></li>");
+                    }
+                });
+                $("body").on("click", "ul#livesearchul li.close", function () {
+                    console.log("clicked");
+                    $("ul#livesearchul").empty();
+                    $("input#searchtext").val("");
+                });
+            });
+
+
+
+        });
+    </script>
+    <script>
+        var hub = $.connection.echo;
+        console.log(hub);
+
+        hub.client.test = function (msg) {
+            console.log(">>>>>>>>>>" + msg);
+        };
+        hub.client.getonlineusers = function (data) {
+            console.log("Data is:", JSON.parse(data));
+            var result = JSON.parse(data);
+
+            for (var i = 0; i < result.length; i++) {
+                var obj = result[i];
+
+                $(".chat > ul").append('<li class="cf' + obj.id + '" data-id="' + obj.id + '">' + obj.friend + '</li>');
+
+                @*var chatbox = $("body > .chatbox").clone();
+
+                chatbox.attr("data-id", obj.id);
+                chatbox.attr("id", "cb" + obj.id);
+                chatbox.addClass("hidden");
+
+                chatbox.find("a.sendchat").attr("data-friend", obj.friend);
+                chatbox.find("a.sendchat").attr("data-id", obj.id);
+                chatbox.find("div.chatboxtext").attr("id", "cbtext" + obj.id);
+                var user="@Context.User.Identity.Name";
+                $("#chb "+user+"").append(chatbox);*@
+                //$("#chb " + user + " #cb" + obj.id + " h4 > span").html('<img src="uploads/' + obj.id + '.jpg" />');
+            }
+
+            }
+        
+        
+        $.connection.hub
+            .start()
+            .done(function () {
+
+                console.log("I am in here");
+                hub.server.hello("Signalr working");
+                
+            });
+    </script>
+</body>
+</html>
+
+
+
+

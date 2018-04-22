@@ -1,0 +1,20 @@
+﻿@model ChatLoud.Models.Profile.ProfileVM
+    @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h2>@Model.Profile.UserName</h2>
+    
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("body").on("click", "a#sendMsg", function (e) {
+            e.preventDefault();
+            console.log("clicked");
+            
+        });
+    }
+
+</script>
+
