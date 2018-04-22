@@ -62,3 +62,21 @@ div.messages{
     overflow: scroll;
 
 }
+
+.col-md-10 .chatbox {
+    position: absolute;
+    left: -3000px;
+}
+
+.chat {
+    position:fixed;
+    bottom:0;
+    right: 30px;
+}
+
+.chat ul li {
+    cursor: pointer;
+    margin: 10px;
+    list-style: none;
+    padding: 10px;
+}

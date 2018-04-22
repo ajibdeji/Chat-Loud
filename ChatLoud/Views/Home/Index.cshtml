@@ -51,19 +51,21 @@
         <div class="row">
             <div class="col-md-4">
                 <h2>Getting started</h2>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <div class="messages"></div>
-                        <textarea class="form-control"></textarea>
 
-                        <a id="sendMsg" class="btn btn-default">Send</a>
-                    </div>
-                </div>
             </div>
-            <div class="chat @User.Identity.Name">
-                <ul></ul>
-            </div> 
-            
+        </div>
+        <div class="chat @User.Identity.Name">
+            <ul></ul>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <div class="chatbox">
+                    <textarea class="form-control"></textarea>
+                    <a id="sendMsg" class="btn btn-default">Send</a>
+                </div>
+
+            </div>
+
         </div>
         <hr />
         <footer>
@@ -125,7 +127,7 @@
 
                 $(".chat > ul").append('<li class="cf' + obj.id + '" data-id="' + obj.id + '">' + obj.friend + '</li>');
 
-                @*var chatbox = $("body > .chatbox").clone();
+                var chatbox = $("body > .chatbox").clone();
 
                 chatbox.attr("data-id", obj.id);
                 chatbox.attr("id", "cb" + obj.id);
@@ -135,8 +137,9 @@
                 chatbox.find("a.sendchat").attr("data-id", obj.id);
                 chatbox.find("div.chatboxtext").attr("id", "cbtext" + obj.id);
                 var user="@Context.User.Identity.Name";
-                $("#chb "+user+"").append(chatbox);*@
+                $("#chb "+user).append(chatbox);
                 //$("#chb " + user + " #cb" + obj.id + " h4 > span").html('<img src="uploads/' + obj.id + '.jpg" />');
+                    
             }
 
             }
