@@ -172,6 +172,25 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService1_GetUsers_ServiceFaultFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IService1_GetSearchedUsers_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -324,6 +343,25 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService1_GetOnlineUsers_ServiceFaultFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IService1_ConnectUser_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -344,6 +382,25 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IService1_ConnectUser_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService1_ConnectUser_ServiceFaultFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -400,6 +457,25 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService1_DisconnectUser_ServiceFaultFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:9011/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -419,6 +495,9 @@
   </wsdl:message>
   <wsdl:message name="IService1_GetUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetUsers_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/ChatLoudService" name="detail" element="q1:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IService1_GetSearchedUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSearchedUsers" />
@@ -444,17 +523,26 @@
   <wsdl:message name="IService1_GetOnlineUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOnlineUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetOnlineUsers_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/ChatLoudService" name="detail" element="q2:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="IService1_ConnectUser_InputMessage">
     <wsdl:part name="parameters" element="tns:ConnectUser" />
   </wsdl:message>
   <wsdl:message name="IService1_ConnectUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:ConnectUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_ConnectUser_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/ChatLoudService" name="detail" element="q3:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="IService1_DisconnectUser_InputMessage">
     <wsdl:part name="parameters" element="tns:DisconnectUser" />
   </wsdl:message>
   <wsdl:message name="IService1_DisconnectUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:DisconnectUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DisconnectUser_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/ChatLoudService" name="detail" element="q4:ServiceFault" />
   </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetChannels">
@@ -464,6 +552,7 @@
     <wsdl:operation name="GetUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetUsers" message="tns:IService1_GetUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetUsersResponse" message="tns:IService1_GetUsers_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IService1/GetUsersServiceFaultFault" name="ServiceFaultFault" message="tns:IService1_GetUsers_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetSearchedUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetSearchedUsers" message="tns:IService1_GetSearchedUsers_InputMessage" />
@@ -480,14 +569,17 @@
     <wsdl:operation name="GetOnlineUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOnlineUsers" message="tns:IService1_GetOnlineUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOnlineUsersResponse" message="tns:IService1_GetOnlineUsers_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IService1/GetOnlineUsersServiceFaultFault" name="ServiceFaultFault" message="tns:IService1_GetOnlineUsers_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ConnectUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/ConnectUser" message="tns:IService1_ConnectUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/ConnectUserResponse" message="tns:IService1_ConnectUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IService1/ConnectUserServiceFaultFault" name="ServiceFaultFault" message="tns:IService1_ConnectUser_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="DisconnectUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DisconnectUser" message="tns:IService1_DisconnectUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DisconnectUserResponse" message="tns:IService1_DisconnectUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IService1/DisconnectUserServiceFaultFault" name="ServiceFaultFault" message="tns:IService1_DisconnectUser_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IService1" type="tns:IService1">
@@ -514,6 +606,10 @@
         <wsp:PolicyReference URI="#WSHttpBinding_IService1_GetUsers_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <wsp:PolicyReference URI="#WSHttpBinding_IService1_GetUsers_ServiceFaultFault_Fault" />
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetSearchedUsers">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetSearchedUsers" style="document" />
@@ -558,6 +654,10 @@
         <wsp:PolicyReference URI="#WSHttpBinding_IService1_GetOnlineUsers_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <wsp:PolicyReference URI="#WSHttpBinding_IService1_GetOnlineUsers_ServiceFaultFault_Fault" />
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ConnectUser">
       <soap12:operation soapAction="http://tempuri.org/IService1/ConnectUser" style="document" />
@@ -569,6 +669,10 @@
         <wsp:PolicyReference URI="#WSHttpBinding_IService1_ConnectUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <wsp:PolicyReference URI="#WSHttpBinding_IService1_ConnectUser_ServiceFaultFault_Fault" />
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="DisconnectUser">
       <soap12:operation soapAction="http://tempuri.org/IService1/DisconnectUser" style="document" />
@@ -580,6 +684,10 @@
         <wsp:PolicyReference URI="#WSHttpBinding_IService1_DisconnectUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <wsp:PolicyReference URI="#WSHttpBinding_IService1_DisconnectUser_ServiceFaultFault_Fault" />
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Service1">

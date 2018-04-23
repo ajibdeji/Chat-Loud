@@ -35,7 +35,7 @@ namespace ChatLoud.Hubs
             var onlineUsers = new List<OnlineUserModel>();
             try
             {
-                onlineUsers = client.GetOnlineUsers().Where(x=>x.Id!=userProfile.Id).ToList();
+                onlineUsers = client.GetOnlineUsers().ToList();
 
             }
             catch (FaultException ex)
@@ -50,7 +50,7 @@ namespace ChatLoud.Hubs
 
             //pass online users into a variable. Don't make unneccesaary call the second time if you need to use the list again
             
-            if (!onlineUsers.Exists(x => x.Id == connectUser.Id))
+            if (!onlineUsers.Any(x => x.Id == connectUser.Id))
             {
                 client.ConnectUser(connectUser);
             }
@@ -82,12 +82,13 @@ namespace ChatLoud.Hubs
             string json = JsonConvert.SerializeObject(transformed);
 
             // Set clients
-            var clients = Clients.All;
+            var clients = Clients.Caller;
 
             // Call js function
-            clients.getonlineusers(json);
+            clients.getonlineusers(Context.User.Identity.Name, json);
 
             Trace.WriteLine("Here I am" + Context.ConnectionId);
+            UpdateChat();
             return base.OnConnected();
         }
 
@@ -97,7 +98,17 @@ namespace ChatLoud.Hubs
 
             var userName = Context.User.Identity.Name;
             var userProfile = client.GetUserProfileByUserName(userName);
+            var onlineUsers = new List<OnlineUserModel>();
 
+            try
+            {
+                onlineUsers = client.GetOnlineUsers().ToList();
+
+            }
+            catch (FaultException ex)
+            {
+                throw ex;
+            }
             var connectUser = new OnlineUser()
             {
                 Id = userProfile.Id,
@@ -106,13 +117,15 @@ namespace ChatLoud.Hubs
 
             try
             {
-                client.DisconnectUser(connectUser.Id);
+                if (onlineUsers.Any(x=> x.Id == userProfile.Id))
+                    client.DisconnectUser(connectUser.Id);
             }
             catch (FaultException ex)
             {
-                String msg = ex.Message;
+                throw ex;
             }
 
+            UpdateChat();
             return base.OnDisconnected(stopCalled);
         }
         public void GetOnlineCount()
@@ -120,6 +133,61 @@ namespace ChatLoud.Hubs
             var clients = Clients.All;
             var usercounter=client.GetOnlineUsers().ToList().Count;
             clients.usercount(usercounter);
+        }
+
+        public void UpdateChat()
+        {
+            var onlineUsers = new List<OnlineUserModel>();
+           
+            onlineUsers = client.GetOnlineUsers().ToList();
+            var onlineUsersIds = onlineUsers.Select(x => x.Id);
+
+            foreach (var userId in onlineUsers.Select(x => x.Id).ToList()) {
+
+                    var user = client.GetUserProfile(userId);
+                    string username = user.UserName;
+
+                var allUsersIds = client.GetUsers().Select(x=> x.Id).ToList();
+                var resultList= onlineUsersIds.Where((i) => allUsersIds.Contains(i)).ToList();
+
+                //if (!dictFriends.ContainsKey(userId))
+                //{
+                //    dictFriends.Add(userId, friend);
+                //}
+                Dictionary<string, string> dictFriends = new Dictionary<string, string>();
+                foreach (var id in resultList)
+                {
+                    var users = client.GetUserProfile(id);
+                    string friend = users.UserName;
+
+                    if (!dictFriends.ContainsKey(id))
+                    {
+                        dictFriends.Add(id, friend);
+                    }
+                }
+                var transformed = from key in dictFriends.Keys
+                                  select new { id = key, friend = dictFriends[key] };
+
+                string json = JsonConvert.SerializeObject(transformed);
+
+                // Set clients
+                var clients = Clients.All;
+
+                // Call js function
+                clients.updatechat(username, json);
+            }
+
+        }
+
+        public void SendChat(string friendId, string friendUsername, string message)
+        {
+            var user = client.GetUserProfileByUserName(Context.User.Identity.Name);
+
+            string userId = user.Id;
+
+            var clients = Clients.All;
+
+            clients.sendchat(userId, Context.User.Identity.Name, friendId, friendUsername, message);
         }
     }
 }

@@ -1140,6 +1140,67 @@ namespace ChatLoud.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/ChatLoudService")]
+    [System.SerializableAttribute()]
+    public partial class ServiceFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DetailsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Details {
+            get {
+                return this.DetailsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DetailsField, value) != true)) {
+                    this.DetailsField = value;
+                    this.RaisePropertyChanged("Details");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Error {
+            get {
+                return this.ErrorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorField, value) != true)) {
+                    this.ErrorField = value;
+                    this.RaisePropertyChanged("Error");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OnlineUserModel", Namespace="http://schemas.datacontract.org/2004/07/ChatLoudService.Model")]
     [System.SerializableAttribute()]
     public partial class OnlineUserModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1226,10 +1287,11 @@ namespace ChatLoud.ServiceReference1 {
         System.Threading.Tasks.Task<ChatLoud.ServiceReference1.Channel[]> GetChannelsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUsers", ReplyAction="http://tempuri.org/IService1/GetUsersResponse")]
-        ChatLoud.ServiceReference1.AspNetUser[] GetUsers();
+        [System.ServiceModel.FaultContractAttribute(typeof(ChatLoud.ServiceReference1.ServiceFault), Action="http://tempuri.org/IService1/GetUsersServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/ChatLoudService")]
+        ChatLoud.ServiceReference1.UserProfile[] GetUsers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUsers", ReplyAction="http://tempuri.org/IService1/GetUsersResponse")]
-        System.Threading.Tasks.Task<ChatLoud.ServiceReference1.AspNetUser[]> GetUsersAsync();
+        System.Threading.Tasks.Task<ChatLoud.ServiceReference1.UserProfile[]> GetUsersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSearchedUsers", ReplyAction="http://tempuri.org/IService1/GetSearchedUsersResponse")]
         ChatLoud.ServiceReference1.UserProfile[] GetSearchedUsers(string userName);
@@ -1250,18 +1312,21 @@ namespace ChatLoud.ServiceReference1 {
         System.Threading.Tasks.Task<ChatLoud.ServiceReference1.UserProfile> GetUserProfileByUserNameAsync(string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnlineUsers", ReplyAction="http://tempuri.org/IService1/GetOnlineUsersResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ChatLoud.ServiceReference1.ServiceFault), Action="http://tempuri.org/IService1/GetOnlineUsersServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/ChatLoudService")]
         ChatLoud.ServiceReference1.OnlineUserModel[] GetOnlineUsers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnlineUsers", ReplyAction="http://tempuri.org/IService1/GetOnlineUsersResponse")]
         System.Threading.Tasks.Task<ChatLoud.ServiceReference1.OnlineUserModel[]> GetOnlineUsersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ConnectUser", ReplyAction="http://tempuri.org/IService1/ConnectUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ChatLoud.ServiceReference1.ServiceFault), Action="http://tempuri.org/IService1/ConnectUserServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/ChatLoudService")]
         void ConnectUser(ChatLoud.ServiceReference1.OnlineUser online);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ConnectUser", ReplyAction="http://tempuri.org/IService1/ConnectUserResponse")]
         System.Threading.Tasks.Task ConnectUserAsync(ChatLoud.ServiceReference1.OnlineUser online);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisconnectUser", ReplyAction="http://tempuri.org/IService1/DisconnectUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ChatLoud.ServiceReference1.ServiceFault), Action="http://tempuri.org/IService1/DisconnectUserServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/ChatLoudService")]
         void DisconnectUser(string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisconnectUser", ReplyAction="http://tempuri.org/IService1/DisconnectUserResponse")]
@@ -1303,11 +1368,11 @@ namespace ChatLoud.ServiceReference1 {
             return base.Channel.GetChannelsAsync();
         }
         
-        public ChatLoud.ServiceReference1.AspNetUser[] GetUsers() {
+        public ChatLoud.ServiceReference1.UserProfile[] GetUsers() {
             return base.Channel.GetUsers();
         }
         
-        public System.Threading.Tasks.Task<ChatLoud.ServiceReference1.AspNetUser[]> GetUsersAsync() {
+        public System.Threading.Tasks.Task<ChatLoud.ServiceReference1.UserProfile[]> GetUsersAsync() {
             return base.Channel.GetUsersAsync();
         }
         

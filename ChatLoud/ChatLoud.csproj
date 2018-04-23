@@ -220,9 +220,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Connected Services\ServiceReference1\ChatLoud.ServiceReference1.AspNetUser.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\ServiceReference1\ChatLoud.ServiceReference1.Channel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>

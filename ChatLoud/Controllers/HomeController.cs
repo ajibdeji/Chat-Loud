@@ -14,6 +14,7 @@ namespace ChatLoud.Controllers
         public ActionResult Index()
         {
             ViewBag.OnlineCount = client.GetOnlineUsers().ToList().Count;
+
             return View();
         }
 

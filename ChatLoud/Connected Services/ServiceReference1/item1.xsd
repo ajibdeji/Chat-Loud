@@ -22,7 +22,7 @@
   <xs:element name="GetUsersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ChatLoudService.Model" minOccurs="0" name="GetUsersResult" nillable="true" type="q2:ArrayOfAspNetUser" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ChatLoudService" minOccurs="0" name="GetUsersResult" nillable="true" type="q2:ArrayOfUserProfile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
